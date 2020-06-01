@@ -27,9 +27,7 @@ class CountryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.let {
-            CountryFragmentArgs.fromBundle(
-                it
-            ).countryUuid
+            CountryFragmentArgs.fromBundle(it).countryUuid
         }
     }
 
