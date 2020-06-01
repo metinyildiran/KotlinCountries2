@@ -6,11 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.kotlincountries2.R
+import com.example.kotlincountries2.adapter.CountryAdapter
+import com.example.kotlincountries2.model.Country
+import java.util.ArrayList
 
 class FeedFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
