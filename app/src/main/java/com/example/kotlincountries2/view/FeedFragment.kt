@@ -41,6 +41,14 @@ class FeedFragment : Fragment() {
             LinearLayoutManager(context)    //linear layout manager item_country leri alta alta göstermeye olanak sağlar
         countryList.adapter = countryAdapter
 
+        swipeRefreshLayout.setOnRefreshListener {
+            countryList.visibility = View.GONE
+            countryError.visibility = View.GONE
+            countryLoading.visibility = View.VISIBLE
+            viewModel.refreshData()
+            swipeRefreshLayout.isRefreshing = false
+        }
+
         observeLiveData()
     }
 
