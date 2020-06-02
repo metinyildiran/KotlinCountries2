@@ -1,23 +1,21 @@
 package com.example.kotlincountries2.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kotlincountries2.R
 import com.example.kotlincountries2.adapter.CountryAdapter
-import com.example.kotlincountries2.model.Country
 import com.example.kotlincountries2.viewmodel.FeedViewModel
 import kotlinx.android.synthetic.main.fragment_feed.*
-import java.util.ArrayList
 
 class FeedFragment : Fragment() {
 
-    private lateinit var viewModel : FeedViewModel
+    private lateinit var viewModel: FeedViewModel
     private val countryAdapter = CountryAdapter(arrayListOf())
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,18 +37,42 @@ class FeedFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(FeedViewModel::class.java)
         viewModel.refreshData()
 
-        countryList.layoutManager = LinearLayoutManager(context)    //linear layout manager item_country leri alta alta göstermeye olanak sağlar
+        countryList.layoutManager =
+            LinearLayoutManager(context)    //linear layout manager item_country leri alta alta göstermeye olanak sağlar
         countryList.adapter = countryAdapter
 
+        observeLiveData()
     }
 
-    fun observeLiveData(){
-        viewModel.countries.observe(this, Observer {
+    fun observeLiveData() {
+        viewModel.countries.observe(viewLifecycleOwner, Observer {
             //FeedViewModel da countries List<Country> türünde bir değişken, o yüzden bize it, bir List<Country> döndürüyor
             it?.let {
                 countryList.visibility = View.VISIBLE
                 countryAdapter.updateCountryList(it)
 
+            }
+        })
+
+        viewModel.countryError.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it) {
+                    countryError.visibility = View.VISIBLE
+                } else {
+                    countryError.visibility = View.GONE
+                }
+            }
+        })
+
+        viewModel.countryLoading.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it) {
+                    countryLoading.visibility = View.VISIBLE
+                    countryList.visibility = View.GONE
+                    countryError.visibility = View.GONE
+                } else {
+                    countryLoading.visibility = View.GONE
+                }
             }
         })
     }

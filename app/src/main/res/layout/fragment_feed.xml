@@ -27,7 +27,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/countryErrorTextView"
+                android:id="@+id/countryError"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/error_try_again"
@@ -38,13 +38,13 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ProgressBar
-                android:id="@+id/countryLoadingProgressBar"
+                android:id="@+id/countryLoading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/countryErrorTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/countryError" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
