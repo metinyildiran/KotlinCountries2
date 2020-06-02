@@ -35,13 +35,13 @@ class FeedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProviders.of(this).get(FeedViewModel::class.java)
-        viewModel.refreshData()
+        viewModel.refreshData()     //internetten veri indirir
 
         countryList.layoutManager =
             LinearLayoutManager(context)    //linear layout manager item_country leri alta alta göstermeye olanak sağlar
         countryList.adapter = countryAdapter
 
-        swipeRefreshLayout.setOnRefreshListener {
+        swipeRefreshLayout.setOnRefreshListener {   //swipeRefreshLayout için yenileme listenerı
             countryList.visibility = View.GONE
             countryError.visibility = View.GONE
             countryLoading.visibility = View.VISIBLE
@@ -52,12 +52,12 @@ class FeedFragment : Fragment() {
         observeLiveData()
     }
 
-    private fun observeLiveData() {
+    private fun observeLiveData() {     //internetten inen veriyi ekrana basar
         viewModel.countries.observe(viewLifecycleOwner, Observer {
             //FeedViewModel da countries List<Country> türünde bir değişken, o yüzden bize it, bir List<Country> döndürüyor
             it?.let {
                 countryList.visibility = View.VISIBLE
-                countryAdapter.updateCountryList(it)
+                countryAdapter.updateCountryList(it)    //internetten inmiş veriyi atar
 
             }
         })

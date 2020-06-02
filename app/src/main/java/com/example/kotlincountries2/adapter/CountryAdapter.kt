@@ -31,13 +31,13 @@ class CountryAdapter(val countryList: ArrayList<Country>) : RecyclerView.Adapter
         holder.view.name.text = countryList[position].countryName  //countryList ten countryName i item_country deki name e atadık
         holder.view.region.text = countryList[position].countryRegion
 
-        holder.view.setOnClickListener {
+        holder.view.setOnClickListener {    //ülkelere basınca çalışır
             val action = FeedFragmentDirections.actionFeedFragmentToCountryFragment()
             Navigation.findNavController(it).navigate(action)
         }
     }
 
-    fun updateCountryList(newCountryList : List<Country>){
+    fun updateCountryList(newCountryList : List<Country>){  //yeni gelen verileri eskileri ile yer değiştirir
         countryList.clear()
         countryList.addAll(newCountryList)
         notifyDataSetChanged()

@@ -22,7 +22,7 @@ class FeedViewModel : ViewModel() {
         getDataFromAPI()
     }
 
-    private fun getDataFromAPI(){
+    private fun getDataFromAPI(){   //internetten veri indirir
         countryLoading.value = true     //ekranda progress bar gözüksün
 
         disposable.add(
@@ -31,7 +31,7 @@ class FeedViewModel : ViewModel() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<List<Country>>(){
                     override fun onSuccess(t: List<Country>) {
-                        countries.value = t
+                        countries.value = t     //internetten gelen verileri countries e atar
                         countryError.value = false
                         countryLoading.value = false
                     }

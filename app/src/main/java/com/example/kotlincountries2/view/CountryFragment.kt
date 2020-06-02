@@ -43,7 +43,7 @@ class CountryFragment : Fragment() {
         }
     }
 
-    private fun observeLiveData(){
+    private fun observeLiveData(){      //verileri ekrana basar
         viewModel.countryLiveData.observe(viewLifecycleOwner, Observer {
             it?.let {
                 countryName.text = it.countryName
