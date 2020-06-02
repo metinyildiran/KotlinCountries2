@@ -11,7 +11,7 @@ interface CountryAPI {
     //EXT = Qubits3/KotlinCountries/master/countrydataset.json
 
     @GET("Qubits3/KotlinCountries/master/countrydataset.json")
-    fun getCountries():Single<List<Country>>
+    fun getCountries():Single<List<Country>>    //Single yerine Observable da kullanılabilir
 
 
 }

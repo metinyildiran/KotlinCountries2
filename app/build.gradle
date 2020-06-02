@@ -16,6 +16,13 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+//        multiDexEnabled true
+
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
     }
 
     dataBinding {
@@ -77,4 +84,5 @@ dependencies {
 
     implementation "androidx.preference:preference:$preferencesVersion"
 
+//    implementation 'com.android.support:multidex:1.0.3'
 }
