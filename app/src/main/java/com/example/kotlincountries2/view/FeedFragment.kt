@@ -44,7 +44,7 @@ class FeedFragment : Fragment() {
         observeLiveData()
     }
 
-    fun observeLiveData() {
+    private fun observeLiveData() {
         viewModel.countries.observe(viewLifecycleOwner, Observer {
             //FeedViewModel da countries List<Country> türünde bir değişken, o yüzden bize it, bir List<Country> döndürüyor
             it?.let {
