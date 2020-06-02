@@ -12,6 +12,7 @@ class CountryViewModel : ViewModel() {
         val country = Country("Norway", "Europe", "Oslo", "NOK", "Norwegian", "www.website.no")
 
         countryLiveData.value = country
+
     }
 
 }
