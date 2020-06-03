@@ -1,6 +1,7 @@
 package com.example.kotlincountries2.viewmodel
 
 import android.app.Application
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.example.kotlincountries2.model.Country
 import com.example.kotlincountries2.service.CountryAPIService
@@ -17,13 +18,33 @@ class FeedViewModel(application: Application) : BaseViewModel(application) {
     private val countryAPIService = CountryAPIService()
     private val disposable = CompositeDisposable()
     private var customPreferences = CustomSharedPreferences(getApplication())
+    private var refreshTime = 10 * 60 * 1000 * 1000 * 1000L     //10 minutes in nanoseconds
 
     val countries = MutableLiveData<List<Country>>()
     val countryError = MutableLiveData<Boolean>()
     val countryLoading = MutableLiveData<Boolean>()
 
     fun refreshData() {
+        val updateTime = customPreferences.getTime()
+
+        if (updateTime != null && updateTime != 0L && System.nanoTime() - updateTime < refreshTime) {   //10 dk yı geçmediyse verileri SQL den al
+            getDataFromSQLite()
+        } else {
+            getDataFromAPI()
+        }
+    }
+
+    fun refreshFromAPI(){
         getDataFromAPI()
+    }
+
+    private fun getDataFromSQLite(){
+        countryLoading.value = true
+        launch {
+            val countries = CountryDatabase(getApplication()).countryDao().getAllCountries()    //SQL den country listesini al
+            showCountries(countries)
+            Toast.makeText(getApplication(), "Countries from SQLite", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun getDataFromAPI() {   //internetten veri indirir
@@ -36,6 +57,7 @@ class FeedViewModel(application: Application) : BaseViewModel(application) {
                 .subscribeWith(object : DisposableSingleObserver<List<Country>>() {
                     override fun onSuccess(t: List<Country>) {      //getData başarılı ise çalıştır
                         storeInSQLite(t)
+                        Toast.makeText(getApplication(), "Countries from API", Toast.LENGTH_LONG).show()
                     }
 
                     override fun onError(e: Throwable) {
@@ -48,7 +70,7 @@ class FeedViewModel(application: Application) : BaseViewModel(application) {
         )
     }
 
-    private fun showCountries(countryList: List<Country>) {  //internetten gelen verileri countries e atar
+    private fun showCountries(countryList: List<Country>) {  //verileri countries e atar
         countries.value = countryList
         countryError.value = false
         countryLoading.value = false
