@@ -7,11 +7,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.kotlincountries2.R
 
-/*
-fun String.myExtension(myParameter : String) {
-    println(myParameter)
-}*/
-
 fun ImageView.downloadFromUrl(url: String?, progressDrawable: CircularProgressDrawable) {
 
     val options = RequestOptions()
@@ -24,7 +19,7 @@ fun ImageView.downloadFromUrl(url: String?, progressDrawable: CircularProgressDr
         .into(this)
 }
 
-fun placeholderProgressBar(context: Context): CircularProgressDrawable{
+fun placeholderProgressBar(context: Context): CircularProgressDrawable {
     return CircularProgressDrawable(context).apply {
         strokeWidth = 8f
         centerRadius = 40f

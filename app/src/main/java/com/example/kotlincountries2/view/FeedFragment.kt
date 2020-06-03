@@ -37,8 +37,7 @@ class FeedFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(FeedViewModel::class.java)
         viewModel.refreshData()     //internetten veri indirir
 
-        countryList.layoutManager =
-            LinearLayoutManager(context)    //linear layout manager item_country leri alta alta göstermeye olanak sağlar
+        countryList.layoutManager = LinearLayoutManager(context)    //linear layout manager item_country leri alta alta göstermeye olanak sağlar
         countryList.adapter = countryAdapter
 
         swipeRefreshLayout.setOnRefreshListener {   //swipeRefreshLayout için yenileme listenerı
