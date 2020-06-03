@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+        <variable
+            name="country"
+            type="com.example.kotlincountries2.model.Country" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
@@ -11,9 +17,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
+            android:contentDescription="@string/country_image"
             android:padding="3dp"
-            android:src="@drawable/ic_launcher_foreground"
-            android:contentDescription="@string/country_image" />
+            android:src="@drawable/ic_launcher_foreground" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -27,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="@string/name"
+                android:text="@{country.countryName}"
                 android:textColor="#000"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -37,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="@string/region" />
+                android:text="@{country.countryRegion}" />
 
         </LinearLayout>
 
