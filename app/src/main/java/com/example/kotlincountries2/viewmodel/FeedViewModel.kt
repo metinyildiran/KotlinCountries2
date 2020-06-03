@@ -2,7 +2,6 @@ package com.example.kotlincountries2.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.kotlincountries2.model.Country
 import com.example.kotlincountries2.service.CountryAPIService
 import com.example.kotlincountries2.service.CountryDatabase
