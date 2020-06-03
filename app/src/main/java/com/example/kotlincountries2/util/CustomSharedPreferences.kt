@@ -13,8 +13,7 @@ class CustomSharedPreferences {
 
         private var sharedPreferences: SharedPreferences? = null
 
-        @Volatile
-        private var instance: CustomSharedPreferences? = null
+        @Volatile private var instance: CustomSharedPreferences? = null
 
         private val lock = Any()
         operator fun invoke(context: Context): CustomSharedPreferences = instance ?: synchronized(lock){
