@@ -11,7 +11,6 @@ class CustomSharedPreferences {
 
         private val PREFERENCES_TIME = "time"
 
-
         private var sharedPreferences: SharedPreferences? = null
 
         @Volatile
