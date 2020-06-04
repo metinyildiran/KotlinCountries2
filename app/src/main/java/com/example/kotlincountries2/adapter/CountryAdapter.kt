@@ -14,7 +14,7 @@ import com.example.kotlincountries2.util.placeholderProgressBar
 import com.example.kotlincountries2.view.FeedFragmentDirections
 import kotlinx.android.synthetic.main.item_country.view.*
 
-class CountryAdapter(val countryList: ArrayList<Country>) : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
+class CountryAdapter(val countryList: ArrayList<Country>) : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>(),CountryClickListener {
 
     class CountryViewHolder(var view : ItemCountryBinding) : RecyclerView.ViewHolder(view.root){    //root binding ile eşleşen view u döndürür
 
@@ -34,6 +34,7 @@ class CountryAdapter(val countryList: ArrayList<Country>) : RecyclerView.Adapter
     override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {  //item_country nin componentlarına ulaşmak için
 
         holder.view.country = countryList[position]
+        holder.view.listener = this     //this listener ı referans gösteriyor
 
         /*
         holder.view.name.text = countryList[position].countryName  //countryList ten countryName i item_country deki name e atadık
@@ -52,5 +53,10 @@ class CountryAdapter(val countryList: ArrayList<Country>) : RecyclerView.Adapter
         countryList.clear()
         countryList.addAll(newCountryList)
         notifyDataSetChanged()
+    }
+
+    override fun onCountryClicked(v: View) {
+        val action = FeedFragmentDirections.actionFeedFragmentToCountryFragment(v.countryUuidText.text.toString().toInt())  //item_country deki countryUuidText ten uuid aldık
+        Navigation.findNavController(v).navigate(action)
     }
 }
