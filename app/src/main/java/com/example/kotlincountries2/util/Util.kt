@@ -29,6 +29,6 @@ fun placeholderProgressBar(context: Context): CircularProgressDrawable {
 }
 
 @BindingAdapter("android:downloadUrl")     //xml de çalıştırmak için
-fun downloadImage(view: ImageView, url: String) {
+fun downloadImage(view: ImageView, url: String?) {
     view.downloadFromUrl(url, placeholderProgressBar(view.context))
 }
